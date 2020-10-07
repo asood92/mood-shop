@@ -2,7 +2,7 @@ import data from "./data.js";
 const itemsContainer = document.getElementById("items");
 
 // the length of our data determines how many times this loop goes around
-data.forEach(function (item, index) {
+data.forEach(function (element, index) {
     // create a new div element and give it a class name
     let newDiv = document.createElement("div");
     newDiv.className = "item";
