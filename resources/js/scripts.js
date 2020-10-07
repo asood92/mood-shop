@@ -1,7 +1,7 @@
 import data from "./data.js";
 const itemsContainer = document.getElementById("items");
 const itemList = document.getElementById("item-list");
-itemList.innerHTML = "<li> Hello World</li>";
+itemList.innerHTML = "<li> Hello World </li>";
 const cartQty = document.getElementById("cart-qty");
 const cartTotal = document.getElementById("cart-total");
 
@@ -52,7 +52,7 @@ function addItem(name, price) {
     for (let i = 0; i < cart.length; i += 1) {
         if (cart[i].name === name) {
             cart[i].qty += 1;
-            return;
+            return qty;
         }
     }
     const item = { name: name, price: price, qty: 1 };
@@ -62,12 +62,10 @@ function addItem(name, price) {
 // show items
 function showItems() {
     const qty = getQty();
-    console.log(`You have ${qty} items in your cart`);
     cartQty.innerHTML = `You have ${qty} items in your cart`;
     let itemStr = "";
     // iterate through cart until all items have been printed
     for (let i = 0; i < cart.length; i += 1) {
-        // console.log(`${cart[i].name} $${cart[i].price} x ${cart[i].qty} `);
         const { name, price, qty } = cart[i];
 
         itemStr += `<li>${name} $${price} x ${qty} = $${qty * price}</li>`;
@@ -76,13 +74,21 @@ function showItems() {
     cartTotal.innerHTML = `Total in cart: $${getTotal()}`;
 }
 
+const all_items_button = Array.from(document.querySelectorAll("button"));
+all_items_button.forEach((elt) =>
+    elt.addEventListener("click", () => {
+        addItem(elt.getAttribute("id"), elt.getAttribute("data-price"));
+        showItems();
+    })
+);
+
 // get quantity
 function getQty() {
     let qty = 0;
     for (let i = 0; i < cart.length; i += 1) {
         qty += cart[i].qty;
     }
-    return qty;
+    return;
 }
 
 // get total
@@ -109,15 +115,4 @@ function removeItem(name, qty = 0) {
     }
 }
 
-addItem("Apple", 0.99);
-addItem("Orange", 1.29);
-addItem("Opinion", 0.02);
-addItem("Apple", 0.99);
-addItem("Frisbee", 9.92);
-addItem("Apple", 0.99);
-addItem("Orange", 1.29);
-
-showItems();
-removeItem("Apple", 1);
-removeItem("Frisbee");
 showItems();
