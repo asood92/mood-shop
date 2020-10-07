@@ -42,6 +42,8 @@ data.forEach(function (element, index) {
 
 // create array for all items
 const cart = [];
+
+// function to add all items to a
 function addItem(name, price) {
     for (let i = 0; i < cart.length; i += 1) {
         if (cart[i].name === name) {
@@ -57,6 +59,7 @@ function addItem(name, price) {
 function showItems() {
     const qty = getQty();
     console.log(`You have ${qty} items in your cart`);
+    // iterate through cart until all items have been printed
     for (let i = 0; i < cart.length; i += 1) {
         console.log(`${cart[i].name} $${cart[i].price} x ${cart[i].qty} `);
     }
